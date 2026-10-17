@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<!-- lang="pt-BR": avisa ao navegador e aos leitores de tela que o texto é português do Brasil (preços em R$) -->
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+
+    <!-- CORREÇÃO: o nome correto desta meta tag é "viewport". Sem ela, o celular
+         mostra a página "encolhida", como se fosse a versão de computador. -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Linha negra — Essencial, por escolha</title>
+
+    <!-- Fontes do Google (as mesmas que você já usava, agora com os pesos 400/500/600) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500&family=Work+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+
+    <!-- Liga o CSS ao HTML -->
+    <link rel="stylesheet" href="style.css">
+
+    <!-- "defer" faz o navegador carregar o JavaScript sem travar a página
+         e executá-lo só depois que o HTML inteiro estiver pronto -->
+    <script src="script.js" defer></script>
+</head>
+<body>
+
+    <!-- =====================================================================
+         BARRA DE NAVEGAÇÃO (a sua, com 2 ajustes: ids e atributos data-filtro)
+         ===================================================================== -->
+    <header class="barra">
+        <a href="#inicio" class="logo">Linha escarlate</a>
+
+        <nav aria-label="Navegação principal">
+            <ul class="menu">
+                <!-- Os links com data-filtro também filtram os produtos (veja script.js) -->
+                <li><a href="#novidades" data-filtro="todos">Novidades</a></li>
+                <li><a href="#colecoes" data-filtro="todos">Coleções</a></li>
+                <li><a href="#novidades" data-filtro="feminino">Feminino</a></li>
+                <li><a href="#novidades" data-filtro="masculino">Masculino</a></li>
+                <li><a href="#contacto">Contacto</a></li>
+            </ul>
+        </nav>
+
+        <!-- O id permite que o JavaScript encontre o botão e o contador -->
+        <button class="carrinho" id="abrir-carrinho" type="button" aria-label="Abrir carrinho">
+            Carrinho <span id="contador-carrinho" aria-live="polite">0</span>
+        </button>
+    </header>
+
+    <main>
+        <!-- =================================================================
+             SEÇÃO APRESENTAÇÃO (hero)
+             A imagem agora fica "atrás" do texto (veja .hero no CSS)
+             ================================================================= -->
+        <section class="hero" id="inicio">
+            <img src="img/banner.jpg" alt="Retrato em preto e branco de mulher com um elegante conjunto de alfaiataria.">
+
+            <!-- Camada escura por cima da foto, só para o texto branco ficar legível -->
+            <div class="hero-sombra"></div>
+
+            <div class="hero-conteudo">
+                <p class="hero-sobretitulo">A expressão do essencial</p>
+                <h1 class="hero-titulo">A elegância permanece.</h1>
+                <p class="hero-texto">Qualidade em cada detalhe. Design atemporal para uma forma singular de estar no mundo.</p>
+
+                <div class="hero-botoes">
+                    <!-- Eram <button>; viraram <a> porque levam a outra parte da página -->
+                    <a href="#novidades" class="botao botao-claro">Ver coleção</a>
+                    <a href="#marca" class="botao botao-contorno">Descobrir a marca</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- =================================================================
+             SEÇÃO LANÇAMENTOS (produtos)
+             ================================================================= -->
+        <section class="secao" id="novidades">
+            <div class="secao-topo">
+                <div>
+                    <p class="sobretitulo">Novidades Linha escarlate</p>
+                    <h2 class="titulo-secao">Peças para descobrir</h2>
+                    <p class="secao-descricao">Confira nossos últimos produtos e descubra a nova tendência.</p>
+                </div>
+
+                <!-- CORREÇÃO: a lista de links com "#masculino #novidades" não funciona
+                     (um link só aceita UM destino). Troquei por botões que filtram via JavaScript. -->
+                <div class="filtros" role="group" aria-label="Filtrar produtos">
+                    <button type="button" class="filtro" data-filtro="todos" aria-pressed="true">Todos</button>
+                    <button type="button" class="filtro" data-filtro="masculino" aria-pressed="false">Masculino</button>
+                    <button type="button" class="filtro" data-filtro="feminino" aria-pressed="false">Feminino</button>
+                </div>
+            </div>
+
+            <!-- GRADE DE PRODUTOS
+                 Cada <article> guarda nome, preço e categoria em atributos data-*.
+                 O JavaScript lê esses atributos: para mudar um produto, edite só aqui. -->
+            <div class="grade-produtos" id="colecoes">
+
+                <article class="produto" data-categoria="Masculino" data-nome="Terno linho branco" data-preco="3600">
+                    <div class="produto-foto">
+                        <img src="img/produto1.jpg" alt="Mulher com vestido preto elegante diante de um fundo cinza.">
+                    </div>
+                    <div class="produto-info">
+                        <div>
+                            <p class="produto-categoria">Masculino · Ternos</p>
+                            <h3 class="produto-nome">Terno linho branco</h3>
+                        </div>
+                        <p class="produto-preco">R$ 3.600</p>
+                    </div>
+                    <button type="button" class="adicionar">Adicionar ao carrinho</button>
+                </article>
+
+                <article class="produto" data-categoria="feminino" data-nome="Blazer Estrutura" data-preco="2490">
+                    <div class="produto-foto">
+                        <img src="img/produto2.jpg" alt="Conjunto branco de alfaiataria em fotografia de moda minimalista.">
+                    </div>
+                    <div class="produto-info">
+                        <div>
+                            <p class="produto-categoria">Feminino · Alfaiataria</p>
+                            <h3 class="produto-nome">Blazer Estrutura</h3>
+                        </div>
+                        <p class="produto-preco">R$ 2.490</p>
+                    </div>
+                    <button type="button" class="adicionar">Adicionar ao carrinho</button>
+                </article>
+
+                <article class="produto" data-categoria="masculino" data-nome="Camisa Linho" data-preco="1190">
+                    <div class="produto-foto">
+                        <img src="img/produto3.jpg" alt="Camisa de linho minimalista exposta em um cabide de madeira.">
+                    </div>
+                    <div class="produto-info">
+                        <div>
+                            <p class="produto-categoria">Masculino · Camisas</p>
+                            <h3 class="produto-nome">Camisa Linho</h3>
+                        </div>
+                        <p class="produto-preco">R$ 1.190</p>
+                    </div>
+                    <button type="button" class="adicionar">Adicionar ao carrinho</button>
+                </article>
+
+                <article class="produto" data-categoria="masculino" data-nome="Casaco Forma" data-preco="3290">
+                    <div class="produto-foto">
+                        <img src="img/produto4.jpg" alt="Casaco escuro em cabide diante de uma cortina, em fotografia preto e branco.">
+                    </div>
+                    <div class="produto-info">
+                        <div>
+                            <p class="produto-categoria">Masculino · Casacos</p>
+                            <h3 class="produto-nome">Casaco Forma</h3>
+                        </div>
+                        <p class="produto-preco">R$ 3.290</p>
+                    </div>
+                    <button type="button" class="adicionar">Adicionar ao carrinho</button>
+                </article>
+
+                <!-- ATENÇÃO: o design original tinha só 4 produtos e o seu HTML tem 8 imagens.
+                     Os produtos 5 a 8 abaixo são EXEMPLOS (nome, categoria e preço inventados).
+                     Troque pelos dados reais e escreva um alt descrevendo cada foto. -->
+                <article class="produto" data-categoria="feminino" data-nome="Calça Linha" data-preco="1490">
+                    <div class="produto-foto">
+                        <img src="img/produto5.jpg" alt="Descrição do produto 5">
+                    </div>
+                    <div class="produto-info">
+                        <div>
+                            <p class="produto-categoria">Feminino · Alfaiataria</p>
+                            <h3 class="produto-nome">Calça Linha</h3>
+                        </div>
+                        <p class="produto-preco">R$ 1.490</p>
+                    </div>
+                    <button type="button" class="adicionar">Adicionar ao carrinho</button>
+                </article>
+
+                <article class="produto" data-categoria="feminino" data-nome="Camisa Ponto" data-preco="990">
+                    <div class="produto-foto">
+                        <img src="img/produto6.jpg" alt="Descrição do produto 6">
+                    </div>
+                    <div class="produto-info">
+                        <div>
+                            <p class="produto-categoria">Feminino · Camisas</p>
+                            <h3 class="produto-nome">Camisa Ponto</h3>
+                        </div>
+                        <p class="produto-preco">R$ 990</p>
+                    </div>
+                    <button type="button" class="adicionar">Adicionar ao carrinho</button>
+                </article>
+
+                <article class="produto" data-categoria="masculino" data-nome="Calça Reta" data-preco="1390">
+                    <div class="produto-foto">
+                        <img src="img/produto7.jpg" alt="Descrição do produto 7">
+                    </div>
+                    <div class="produto-info">
+                        <div>
+                            <p class="produto-categoria">Masculino · Alfaiataria</p>
+                            <h3 class="produto-nome">Calça Reta</h3>
+                        </div>
+                        <p class="produto-preco">R$ 1.390</p>
+                    </div>
+                    <button type="button" class="adicionar">Adicionar ao carrinho</button>
+                </article>
+
+                <article class="produto" data-categoria="masculino" data-nome="Malha Fina" data-preco="1090">
+                    <div class="produto-foto">
+                        <img src="img/produto8.jpg" alt="Descrição do produto 8">
+                    </div>
+                    <div class="produto-info">
+                        <div>
+                            <p class="produto-categoria">Masculino · Malhas</p>
+                            <h3 class="produto-nome">Malha Fina</h3>
+                        </div>
+                        <p class="produto-preco">R$ 1.090</p>
+                    </div>
+                    <button type="button" class="adicionar">Adicionar ao carrinho</button>
+                </article>
+            </div>
+        </section>
+
+        <!-- =================================================================
+             SEÇÃO DA MARCA (nova: veio do design original)
+             Precisa de uma imagem nova: img/marca.jpg
+             ================================================================= -->
+        <section class="marca" id="marca">
+            <div class="marca-foto">
+                <img src="img/marca.jpg" alt="Mesa de ateliê com tecidos, tesoura e fita métrica usados na confecção de roupas.">
+            </div>
+            <div class="marca-texto">
+                <p class="sobretitulo">Nossa perspectiva</p>
+                <h2 class="marca-titulo">Feito com intenção. Pensado para durar.</h2>
+                <p class="marca-descricao">Selecionamos materiais pelo toque, pela estrutura e pelo modo como atravessam o tempo. Cada peça recebe acabamento impecável e nasce de uma produção cuidadosa — porque o luxo está naquilo que se percebe de perto.</p>
+            </div>
+        </section>
+
+        <!-- =================================================================
+             NEWSLETTER / CONTACTO (nova)
+             ================================================================= -->
+        <section class="secao contato" id="contacto">
+            <div>
+                <p class="sobretitulo">Uma conversa discreta</p>
+                <h2 class="titulo-secao">Fique por perto.</h2>
+                <p class="contato-descricao">Novas coleções, histórias e detalhes selecionados, enviados ao seu e-mail.</p>
+            </div>
+
+            <!-- novalidate: desliga as mensagens padrão do navegador; o script.js mostra a nossa -->
+            <form id="form-newsletter" novalidate>
+                <label for="email-newsletter">Seu e-mail</label>
+                <div class="campo-email">
+                    <input id="email-newsletter" type="email" autocomplete="email" required placeholder="nome@exemplo.com">
+                    <button id="botao-inscrever" type="submit">Inscrever-se</button>
+                </div>
+                <!-- role="status": leitores de tela anunciam o texto quando ele muda -->
+                <p id="status-newsletter" class="status-newsletter" role="status" aria-live="polite"></p>
+            </form>
+        </section>
+    </main>
+
+    <!-- =====================================================================
+         RODAPÉ (novo)
+         ===================================================================== -->
+    <footer class="rodape">
+        <div class="rodape-conteudo">
+            <div>
+                <p class="rodape-marca">Linha escarlate</p>
+                <p class="rodape-nota">O essencial, sem concessões.</p>
+            </div>
+
+            <nav class="rodape-nav" aria-label="Informações e redes sociais">
+                <!-- data-info diz qual texto mostrar na janelinha (veja script.js) -->
+                <button type="button" data-info="atendimento">Atendimento</button>
+                <button type="button" data-info="trocas">Trocas</button>
+                <a href="https://www.instagram.com/" target="_blank" rel="noopener noreferrer">Instagram</a>
+                <button type="button" data-info="politicas">Políticas</button>
+            </nav>
+        </div>
+    </footer>
+
+    <!-- =====================================================================
+         CARRINHO LATERAL (novo)
+         Começa escondido por causa do atributo "hidden"; o JavaScript o mostra.
+         ===================================================================== -->
+    <div id="carrinho-sobreposicao" class="sobreposicao" hidden>
+        <!-- Fundo escuro: clicar nele fecha o carrinho -->
+        <button id="carrinho-fundo" type="button" class="fundo-escuro" aria-label="Fechar carrinho"></button>
+
+        <aside class="gaveta" role="dialog" aria-modal="true" aria-labelledby="carrinho-titulo">
+            <div class="gaveta-topo">
+                <div>
+                    <h2 id="carrinho-titulo" class="gaveta-titulo">Seu carrinho</h2>
+                    <p class="gaveta-aviso">Demonstração · compras indisponíveis</p>
+                </div>
+                <button id="fechar-carrinho" type="button" class="fechar" aria-label="Fechar carrinho">×</button>
+            </div>
+
+            <p id="carrinho-vazio" class="carrinho-vazio">Seu carrinho está vazio.</p>
+            <div id="carrinho-itens" class="carrinho-itens" aria-live="polite"></div>
+
+            <div class="gaveta-total">
+                <span>Total estimado</span>
+                <strong id="carrinho-total">R$ 0,00</strong>
+            </div>
+        </aside>
+    </div>
+
+    <!-- JANELA DE INFORMAÇÕES (Atendimento, Trocas, Políticas) -->
+    <div id="info-sobreposicao" class="sobreposicao sobreposicao-centro" hidden>
+        <section class="janela-info" role="dialog" aria-modal="true" aria-labelledby="info-titulo">
+            <div class="janela-info-topo">
+                <h2 id="info-titulo" class="janela-info-titulo"></h2>
+                <button id="fechar-info" type="button" class="fechar" aria-label="Fechar informações">×</button>
+            </div>
+            <p id="info-texto" class="janela-info-texto"></p>
+        </section>
+    </div>
+
+</body>
+</html>
