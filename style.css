@@ -156,7 +156,7 @@ button {
   height: 100%;
   object-fit: cover;      /* preenche sem deformar, cortando o excesso */
   object-position: center;
-  filter: grayscale(100%); /* deixa a foto em preto e branco, como no original */
+  filter: grayscale(100%); /* banner em preto e branco, como no original */
 }
 
 /* Camada escura em degradê (esquerda forte → direita leve) para dar leitura ao texto */
@@ -327,7 +327,7 @@ button {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  filter: grayscale(100%);
+  /* CORRIGIDO: removido "filter: grayscale(100%)" para as fotos aparecerem coloridas */
   transition: transform 0.6s ease;
 }
 
@@ -394,7 +394,7 @@ button {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  filter: grayscale(100%);
+  /* CORRIGIDO: removido "filter: grayscale(100%)" para a foto aparecer colorida */
 }
 
 .marca-texto {
