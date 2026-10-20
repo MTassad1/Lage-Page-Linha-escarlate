@@ -2,12 +2,11 @@
    LINHA NEGRA — style.css
    Organização do arquivo (de cima para baixo):
      1. Variáveis e reset         6. Marca (sobre nós)
-     2. Barra de navegação        7. Newsletter / contacto
+     2. Barra de navegação        7. Newsletter / contato
      3. Hero (apresentação)       8. Rodapé
      4. Estrutura das seções      9. Carrinho e janela de informações
      5. Produtos                 10. Responsivo e acessibilidade
    ========================================================================= */
-
 
 /* =========================================================================
    1. VARIÁVEIS E RESET
@@ -236,7 +235,7 @@ button {
 
 
 /* =========================================================================
-   4. ESTRUTURA DAS SEÇÕES (usada em Produtos e Contacto)
+   4. ESTRUTURA DAS SEÇÕES (usada em Produtos e Contato)
    ========================================================================= */
 
 .secao {
@@ -425,7 +424,7 @@ button {
 
 
 /* =========================================================================
-   7. NEWSLETTER / CONTACTO
+   7. NEWSLETTER / CONTATO
    ========================================================================= */
 
 .contato {

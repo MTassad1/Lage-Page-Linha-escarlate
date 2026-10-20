@@ -156,7 +156,7 @@ const informacoes = {
   ],
   politicas: [
     "Políticas",
-    "Esta página salva somente o e-mail enviado para a newsletter, com a data da inscrição, no seu próprio navegador. O carrinho demonstrativo não realiza compras e não solicita dados de pagamento."
+    "Esta página salva somente o e-mail enviado para a newsletter, com a data da inscrição, no seu próprio navegador, e o conteúdo do carrinho demonstrativo, também no seu próprio navegador. O carrinho não realiza compras e não solicita dados de pagamento."
   ]
 };
 
