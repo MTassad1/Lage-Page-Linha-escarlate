@@ -165,7 +165,7 @@ Por ser um site estático, este projeto **não** faz:
 
 ## Autor
 
-Criado por **mtassad1**.
+Criado por **Matheus Thiago Assad**.
 
 - GitHub: [github.com/mtassad1](https://github.com/mtassad1)
 
