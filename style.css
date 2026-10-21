@@ -841,3 +841,74 @@ button {
     transition: none !important;
   }
 }
+
+/* =========================================================================
+   NOVIDADES: login, tamanhos, quantidade, edição limitada e checkout
+   ========================================================================= */
+.barra-acoes { display: flex; align-items: center; gap: 16px; }
+
+.botao-escuro {
+  display: inline-block; margin-top: 20px; padding: 14px 28px;
+  background: var(--tinta); color: #fff; border: 1px solid var(--tinta);
+  font: 500 13px var(--fonte-texto); text-align: center; text-decoration: none; cursor: pointer;
+}
+.botao-escuro:hover { opacity: 0.85; }
+.botao-escuro:disabled { opacity: 0.5; cursor: wait; }
+#ir-checkout { display: block; margin: 16px 0 0; }
+#ir-checkout[hidden] { display: none; }
+
+.janela-info { max-height: 90vh; overflow: auto; }
+.rotulo-campo { margin: 20px 0 8px; font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--cinza-escuro); }
+.quantidade { display: inline-flex; border: 1px solid var(--linha); }
+.quantidade button { width: 40px; border: 0; background: none; font-size: 18px; cursor: pointer; }
+.quantidade input { width: 64px; border: 0; text-align: center; font: 15px var(--fonte-texto); background: none; }
+
+.campo-texto { display: block; margin-top: 16px; font-size: 12px; color: var(--cinza-escuro); }
+.campo-texto input, .campo-texto select {
+  display: block; width: 100%; margin-top: 6px; padding: 12px;
+  border: 1px solid var(--linha); background: #fff; font: 15px var(--fonte-texto); color: var(--tinta);
+}
+.campo-texto[hidden] { display: none; }
+.linha-campos { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+
+.item-controles { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; justify-content: flex-end; }
+
+.produto-limitado .produto-foto { position: relative; }
+.selo { position: absolute; top: 12px; left: 12px; z-index: 1; padding: 6px 10px; background: var(--tinta); color: #fff; font-size: 10px; letter-spacing: 0.15em; text-transform: uppercase; }
+.limitado-info { margin-top: 12px; font-size: 12px; color: var(--cinza-escuro); }
+.contagem { margin-top: 4px; font-size: 13px; font-weight: 600; color: #8c1d1d; }
+.adicionar:disabled { opacity: 0.4; cursor: not-allowed; }
+
+/* Checkout */
+.checkout { max-width: 1100px; margin: 0 auto; padding: 48px 24px 96px; display: grid; grid-template-columns: 1.4fr 1fr; gap: 48px; }
+.checkout fieldset { margin: 0 0 32px; padding: 0; border: 0; }
+.checkout legend { margin-bottom: 4px; font-family: var(--fonte-titulo); font-size: 24px; }
+.opcao-pagamento { display: flex; align-items: center; gap: 10px; margin-top: 12px; padding: 14px; border: 1px solid var(--linha); cursor: pointer; font-size: 15px; }
+.resumo { align-self: start; padding: 28px; background: var(--fundo-marca); }
+.resumo-item { display: flex; justify-content: space-between; gap: 12px; padding: 10px 0; border-bottom: 1px solid var(--linha); font-size: 14px; }
+.resumo-total { display: flex; justify-content: space-between; margin-top: 16px; font-size: 18px; }
+.erro-checkout { min-height: 20px; margin-top: 12px; font-size: 13px; color: #8c1d1d; }
+.tela-centro { max-width: 560px; margin: 0 auto; padding: 64px 24px; text-align: center; }
+.tela-centro[hidden], .checkout[hidden] { display: none; }
+#qr-pix { display: flex; justify-content: center; margin: 24px 0; }
+.pix-codigo { width: 100%; height: 110px; padding: 12px; border: 1px solid var(--linha); font: 12px monospace; resize: none; }
+@media (max-width: 800px) { .checkout { grid-template-columns: 1fr; } }
+
+
+/* Aviso rápido, guia de tamanhos e ajustes de celular */
+.aviso { position: fixed; left: 50%; bottom: 24px; z-index: 3000; max-width: 90vw; padding: 14px 22px; background: var(--tinta); color: #fff; font-size: 13px; transform: translate(-50%, 20px); opacity: 0; pointer-events: none; transition: opacity 0.25s, transform 0.25s; }
+.aviso-visivel { opacity: 1; transform: translate(-50%, 0); }
+.link-guia { margin-top: 12px; padding: 0 0 2px; background: none; border: 0; border-bottom: 1px solid var(--tinta); font-size: 12px; cursor: pointer; }
+.guia-tamanhos { margin-top: 12px; padding: 12px; background: #fff; border: 1px solid var(--linha); font-size: 13px; }
+.guia-tamanhos[hidden] { display: none; }
+.guia-tamanhos table { width: 100%; border-collapse: collapse; text-align: left; }
+.guia-tamanhos th, .guia-tamanhos td { padding: 6px 4px; border-bottom: 1px solid var(--linha); }
+.guia-tamanhos p { margin-top: 8px; font-size: 11px; color: var(--cinza-escuro); }
+.resumo-item[hidden] { display: none; }
+@media (max-width: 639px) {
+  .barra-acoes { gap: 8px; }
+  .barra-acoes .carrinho { padding: 8px 12px; font-size: 12px; }
+  .logo { font-size: 18px; }
+  .item-carrinho { flex-wrap: wrap; gap: 8px; }
+  .item-controles { justify-content: flex-start; }
+}

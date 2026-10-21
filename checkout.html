@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checkout · Linha escarlate</title>
+    <meta name="robots" content="noindex">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500&family=Work+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js" defer></script>
+    <script src="comum.js" defer></script>
+    <script src="checkout.js" defer></script>
+</head>
+<body>
+    <header class="barra">
+        <a href="index.html" class="logo">Linha escarlate</a>
+        <a href="index.html" class="carrinho">Voltar à loja</a>
+    </header>
+
+    <main>
+        <!-- Tela 1: formulário -->
+        <div class="checkout" id="tela-form">
+            <form id="form-checkout" novalidate>
+                <p class="sobretitulo">Demonstração · nenhuma cobrança é feita</p>
+                <h1 class="titulo-secao">Finalizar compra</h1>
+
+                <fieldset>
+                    <legend>Seus dados</legend>
+                    <label class="campo-texto">E-mail<input id="ck-email" type="email" autocomplete="email" required></label>
+                    <label class="campo-texto">Confirme o e-mail<input id="ck-email2" type="email" autocomplete="email" required></label>
+                    <label class="campo-texto">CPF<input id="ck-cpf" inputmode="numeric" placeholder="000.000.000-00" required></label>
+                </fieldset>
+
+                <fieldset>
+                    <legend>Entrega</legend>
+                    <label class="campo-texto">CEP<input id="ck-cep" inputmode="numeric" autocomplete="postal-code" placeholder="00000-000" required></label>
+                    <label class="campo-texto">Rua<input id="ck-rua" autocomplete="address-line1" required></label>
+                    <div class="linha-campos">
+                        <label class="campo-texto">Número<input id="ck-numero" required></label>
+                        <label class="campo-texto">Complemento<input id="ck-complemento" placeholder="Opcional"></label>
+                    </div>
+                </fieldset>
+
+                <fieldset>
+                    <legend>Cupom</legend>
+                    <div class="linha-campos">
+                        <label class="campo-texto">Código<input id="ck-cupom" autocomplete="off" placeholder="Opcional"></label>
+                        <button type="button" id="ck-cupom-aplicar" class="botao-escuro" style="align-self:end">Aplicar</button>
+                    </div>
+                    <p id="cupom-status" class="erro-checkout" role="status"></p>
+                </fieldset>
+
+                <fieldset>
+                    <legend>Pagamento</legend>
+                    <label class="opcao-pagamento"><input type="radio" name="pagamento" value="credito" checked> Cartão de crédito</label>
+                    <label class="opcao-pagamento"><input type="radio" name="pagamento" value="debito"> Cartão de débito</label>
+                    <label class="opcao-pagamento"><input type="radio" name="pagamento" value="pix"> PIX</label>
+
+                    <div id="bloco-cartao">
+                        <label class="campo-texto">Número do cartão<input id="ck-cartao" inputmode="numeric" autocomplete="cc-number" placeholder="0000 0000 0000 0000"></label>
+                        <div class="linha-campos">
+                            <label class="campo-texto">Validade<input id="ck-validade" inputmode="numeric" autocomplete="cc-exp" placeholder="MM/AA"></label>
+                            <label class="campo-texto">CVV<input id="ck-cvv" inputmode="numeric" autocomplete="cc-csc" placeholder="000"></label>
+                        </div>
+                        <label class="campo-texto" id="bloco-parcelas">Parcelas<select id="ck-parcelas"></select></label>
+                    </div>
+                </fieldset>
+
+                <p id="erro-checkout" class="erro-checkout" role="alert"></p>
+                <button id="ck-enviar" type="submit" class="botao-escuro">Confirmar pedido</button>
+            </form>
+
+            <aside class="resumo" aria-label="Resumo do pedido">
+                <h2 class="titulo-secao" style="font-size:24px">Resumo</h2>
+                <div id="resumo-itens"></div>
+                <div class="resumo-item"><span>Subtotal</span><span id="resumo-subtotal"></span></div>
+                <div class="resumo-item" id="linha-desconto" hidden><span>Desconto</span><span id="resumo-desconto"></span></div>
+                <div class="resumo-item"><span>Frete (simulado)</span><span id="resumo-frete">informe o CEP</span></div>
+                <div class="resumo-total"><span>Total</span><strong id="resumo-total">R$ 0,00</strong></div>
+            </aside>
+        </div>
+
+        <!-- Carrinho vazio -->
+        <section class="tela-centro" id="tela-vazio" hidden>
+            <h1 class="titulo-secao">Seu carrinho está vazio.</h1>
+            <a class="botao-escuro" href="index.html">Voltar à loja</a>
+        </section>
+
+        <!-- Tela 2: PIX -->
+        <section class="tela-centro" id="tela-pix" hidden>
+            <p class="sobretitulo">Pague com PIX</p>
+            <h1 class="titulo-secao">Escaneie o QR Code</h1>
+            <div id="qr-pix"></div>
+            <textarea id="pix-codigo" class="pix-codigo" readonly aria-label="PIX copia e cola"></textarea>
+            <button type="button" id="pix-copiar" class="botao-escuro">Copiar código</button>
+            <p id="pix-status" class="erro-checkout" role="status" style="color:inherit"></p>
+            <button type="button" id="pix-verificar" class="botao-escuro">Já paguei, verificar pagamento</button>
+        </section>
+
+        <!-- Tela 3: confirmação -->
+        <section class="tela-centro" id="tela-ok" hidden>
+            <p class="sobretitulo">Pedido <span id="ok-numero"></span></p>
+            <h1 class="titulo-secao" id="ok-titulo">Pagamento realizado</h1>
+            <p class="secao-descricao" style="margin:12px auto">Confirmação enviada para <strong id="ok-email"></strong>. Esta é uma simulação: nenhuma cobrança real foi feita.</p>
+            <div class="resumo" id="ok-resumo" style="text-align:left;margin:24px 0"></div>
+            <a class="botao-escuro" href="index.html">Voltar à loja</a>
+        </section>
+    </main>
+</body>
+</html>
